@@ -10,7 +10,15 @@ public class ATM {
     public static final int VIEW = 1;
     public static final int DEPOSIT = 2;
     public static final int WITHDRAW = 3;
-    public static final int LOGOUT = 4;
+    public static final int TRANSFER = 4;
+    public static final int LOGOUT = 5;
+    
+    public static final int INVAILD = 0;
+    public static final int INSUFFICIENT = 1;
+    public static final int SUCCESS = 2;
+    public static final int INVALIDMAX = 3;
+    public static final int INVALIDADD = 4;
+    public static final long INVALIDTOP = 1000000000000L;
     
     public ATM() {
         in = new Scanner(System.in);
