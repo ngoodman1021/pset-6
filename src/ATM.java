@@ -20,18 +20,52 @@ public class ATM {
     public static final int INVALIDADD = 4;
     public static final long INVALIDTOP = 1000000000000L;
     
+    public static final int FIRST_NAME_WIDTH = 20;
+    public static final int LAST_NAME_WIDTH = 20;
+    int needNextLine = 0;
+    int logoutAmount = 0;
+    
     public ATM() {
-        in = new Scanner(System.in);
+        this.in = new Scanner(System.in);
         
-        activeAccount = new BankAccount(1234, 123456789, 0, new User("Ryan", "Wilson"));
+        try {
+        		this.bank = new Bank();
+        	}catch (IOException e){
+        		
+        }
+        
     }
     
     public void startup() {
         System.out.println("Welcome to the AIT ATM!\n");
         
         while (true) {
+            if(needNextLine != 0 || logoutAmount != 0) {
+            	in.nextLine();
+            }
+            
             System.out.print("Account No.: ");
-            long accountNo = in.nextLong();
+            String accountNoString = in.nextLine();
+            
+            if(accountNoString.equals("+")){
+            	System.out.print("First Name: ");
+            	String firstName = in.nextLine();
+            	
+            	if(firstName.length() > 20) {
+            		System.out.println("\nFrist Name is too long. Please shorten the length.");
+            		System.out.print("\nFrist Name: ");
+            		firstName = in.nextLine();
+            	}
+            	
+            	System.out.print("Last Name: ");
+            	String lastName = in.nextLine();	
+            
+            	if(lastName.length() > 20) {
+            		System.out.println("\nFrist Name is too long. Please shorten the length.");
+        			System.out.print("\nFrist Name: ");
+        			lastName = in.nextLine();
+            	}
+        	}
             
             System.out.print("PIN        : ");
             int pin = in.nextInt();
