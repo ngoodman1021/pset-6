@@ -180,12 +180,61 @@ public class ATM {
         
         }else if(status == ATM.INSUFFICIENT){
         	System.out.println("\nWithdrawal rejected. Insufficient\n");
-        }else {
+        	
+        }else if(status == ATM.SUCCESS){
         	System.out.println("\nWithdrawal accepted.\n");
+        	
         }
         
         bank.update(activeAccount);
     		bank.save();
+    }
+    
+    public void transfer() {
+        System.out.println("Enter account: ");
+        long accountNo = in.nextLong();
+        
+        System.out.println("Enter amount: ");
+        long amount = in.nextLong();
+        
+        BankAccount currentAccount = bank.getAccount(accountNo);
+        
+        int depositStatus = 0;
+        
+        if (currentAccount != null) {
+        	depositStatus = currentAccount.deposit(amount);
+        	
+        }
+        
+        if (depositStatus == ATM.SUCCESS) {
+        	activeAccount.withdraw(amount);
+        	
+        }
+        
+        if (currentAccount == null) {
+        	System.out.println("\nTransfer rejected. Destination account not found\n");
+        	
+        }else if(depositStatus == ATM.INVALID){
+        	System.out.println("\nTransfer rejected. Amount must be greater than $0.00.\n");
+        	
+        }else if (depositStatus == ATM.INVALIDMAX) {
+        	System.out.println("\nTransfer rejected. Amount would cause balance to exceed $999,999,999,999.99.\n");
+        	
+        }else if (depositStatus == ATM.SUCCESS) {
+        	System.out.println("\nTransfer accepted.\n");
+        	
+        }else {
+        	System.out.println("\nTransfer rejected. Insufficient funds.\n");
+        	
+        }
+        
+        bank.update(activeAccount);
+    		bank.save();
+    		
+    		if(currentAccount != null) {
+    			bank.update(currentAccount);
+        		bank.save();
+    		}
     }
     
     public void shutdown() {
@@ -201,26 +250,5 @@ public class ATM {
         ATM atm = new ATM();
         
         atm.startup();
-    }
-    /**
-     * Constructs a new instance of the ATM class.
-     */
-    
-    public ATM() {
-        this.in = new Scanner(System.in);
-        
-        try {
-			this.bank = new Bank();
-		} catch (IOException e) {
-			// cleanup any resources (i.e., the Scanner) and exit
-		}
-    }
-    
-    /*
-     * Application execution begins here.
-     */
-    
-    public static void main(String[] args) {
-        ATM atm = new ATM();
     }
 }
