@@ -82,11 +82,26 @@ public class ATM {
             
             }
             
-            User newUser = new User(firstName,lastName);
+            	User newUser = new User(firstName,lastName);
             
-            BankAccount newAccount = bank.createAccount(pin, newUser);
+            	BankAccount newAccount = bank.createAccount(pin, newUser);
             
-            if (isValidLogin(accountNo, pin)) {
+            	long newAccountNo = newAccount.getAccountNo();
+            
+            	System.out.println("\nThank you. Your account number is " + newAccountNo + ".\nPlease login to access your newly created account\n");
+     
+            	needNextLine++;
+            	bank.update(newAccount);
+            	bank.save();
+            
+        }else {
+        	
+        	long accountNo = Long.valueOf(accountNoString);
+        	
+        	System.out.print("PIN        : ");
+        	int pin = in.nextInt();
+        	
+        	if (isValidLogin(accountNo, pin)) {
                 System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
                 
                 boolean validLogin = true;
@@ -108,6 +123,9 @@ public class ATM {
             }
         }
     }
+ }
+            
+            
     
     public boolean isValidLogin(long accountNo, int pin) {
         return accountNo == activeAccount.getAccountNo() && pin == activeAccount.getPin();
