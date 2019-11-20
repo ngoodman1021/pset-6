@@ -13,7 +13,7 @@ public class ATM {
     public static final int TRANSFER = 4;
     public static final int LOGOUT = 5;
     
-    public static final int INVAILD = 0;
+    public static final int INVALID = 0;
     public static final int INSUFFICIENT = 1;
     public static final int SUCCESS = 2;
     public static final int INVALIDMAX = 3;
@@ -153,7 +153,7 @@ public class ATM {
         
         int status = activeAccount.deposit(amount);
         
-        if(status == ATM.INVAILD) {
+        if(status == ATM.INVALID) {
         	System.out.println("\nDeposit rejected. Amount must be greater than $0.00.\n");	
         
         }else if (status == ATM.INVALIDMAX) {
@@ -173,8 +173,19 @@ public class ATM {
         System.out.print("\nEnter amount: ");
         double amount = in.nextDouble();
         
-        activeAccount.withdraw(amount);
-        System.out.println();
+        int status = activeAccount.withdraw(amount);
+        
+        if(status == ATM.INVALID) {
+        	System.out.println("\nWithdrawal rejected. Amount must be greater than $0.00.\n");	
+        
+        }else if(status == ATM.INSUFFICIENT){
+        	System.out.println("\nWithdrawal rejected. Insufficient\n");
+        }else {
+        	System.out.println("\nWithdrawal accepted.\n");
+        }
+        
+        bank.update(activeAccount);
+    		bank.save();
     }
     
     public void shutdown() {
