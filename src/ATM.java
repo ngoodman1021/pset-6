@@ -119,6 +119,7 @@ public class ATM {
                     shutdown();
                 } else {
                     System.out.println("\nInvalid account number and/or PIN.\n");
+                    needNextLine++;
                 }
             }
         }
@@ -128,14 +129,16 @@ public class ATM {
             
     
     public boolean isValidLogin(long accountNo, int pin) {
-        return accountNo == activeAccount.getAccountNo() && pin == activeAccount.getPin();
+        activeAccount = bank.login(accountNo, pin);
+        return activeAccount != null;
     }
     
     public int getSelection() {
-        System.out.println("[1] View balance");
-        System.out.println("[2] Deposit money");
-        System.out.println("[3] Withdraw money");
-        System.out.println("[4] Logout");
+        System.out.println("[1] View Balance");
+        System.out.println("[2] Deposit Money");
+        System.out.println("[3] Withdraw Money");
+        System.out.println("[4] Transfer Money");
+        System.out.println("[5] Logout");
         
         return in.nextInt();
     }
@@ -148,8 +151,22 @@ public class ATM {
         System.out.print("\nEnter amount: ");
         double amount = in.nextDouble();
         
-        activeAccount.deposit(amount);
-        System.out.println();
+        int status = activeAccount.deposit(amount);
+        
+        if(status == ATM.INVAILD) {
+        	System.out.println("\nDeposit rejected. Amount must be greater than $0.00.\n");	
+        
+        }else if (status == ATM.INVALIDMAX) {
+        	System.out.println("\nDeposit rejected. Amount would cause balance to exceed $999,999,999,999.99.\n");
+        
+        }else {
+        	System.out.println("\nDeposit accepted.");
+        	
+        }
+       
+        bank.update(activeAccount);
+        	bank.save();
+        
     }
     
     public void withdraw() {
