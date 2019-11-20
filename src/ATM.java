@@ -61,14 +61,30 @@ public class ATM {
             	String lastName = in.nextLine();	
             
             	if(lastName.length() > 20) {
-            		System.out.println("\nFrist Name is too long. Please shorten the length.");
-        			System.out.print("\nFrist Name: ");
+            		System.out.println("\nLast Name is too long. Please shorten the length.");
+        			System.out.print("\nLast Name: ");
         			lastName = in.nextLine();
             	}
         	}
             
             System.out.print("PIN        : ");
             int pin = in.nextInt();
+            
+            if(pin > 9999){
+            	System.out.println("\nPin is too long. Please enter a pin 1000-9999.");
+            	System.out.print("\nPIN        : ");
+            	pin = in.nextInt();
+            
+            }else if(pin < 1000) {
+            	System.out.println("\nPin is too short. Please enter a pin 1000-9999.");
+            	System.out.print("\nPIN        : ");
+            	pin = in.nextInt();
+            
+            }
+            
+            User newUser = new User(firstName,lastName);
+            
+            BankAccount newAccount = bank.createAccount(pin, newUser);
             
             if (isValidLogin(accountNo, pin)) {
                 System.out.println("\nHello, again, " + activeAccount.getAccountHolder().getFirstName() + "!\n");
