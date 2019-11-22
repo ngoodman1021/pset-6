@@ -58,5 +58,19 @@ public class BankAccount {
     	return currency.format(balance);
     }
     
-    //hi
+    public int deposit(double amount) {
+    	if (amount <= 0) {
+    		return ATM.INVALID;
+    	
+    	}else if(balance + amount >= ATM.INVALIDTOP){
+    		return ATM.INVALIDMAX;
+    	
+    	}else if(balance + amount > balance) {
+    		return ATM.INSUFFICIENT;
+    	
+    	}else{
+    		balance = balance + amount;
+    	}
+    	return ATM.SUCCESS;
+    }
 }
