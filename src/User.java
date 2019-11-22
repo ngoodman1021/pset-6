@@ -4,13 +4,13 @@ public class User {
     private String lastName;
     
     public String serialize() {
-    return String.format("%1$-" + ATM.FIRST_NAME_WIDTH + "s", firstName) +
-    String.format("%1$-" + ATM.LAST_NAME_WIDTH + "s", lastName);
+    	return String.format("%1$-" + ATM.FIRST_NAME_WIDTH + "s", firstName) +
+    			String.format("%1$-" + ATM.LAST_NAME_WIDTH + "s", lastName);
     }
     
     public User(String firstName, String lastName) {
-    this.firstName = firstName;
-    this.lastName = lastName;
+    	this.firstName = firstName;
+    	this.lastName = lastName;
     }
     
     
