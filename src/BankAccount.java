@@ -37,4 +37,26 @@ public class BankAccount {
     	this.balance = balance;
     	this.accountHolder = accountHolder;
     }
+    
+    
+    
+    
+    public int getPin() {
+    	return pin;
+    }
+    
+    public long getAccountNo() {
+    	return getAccountNo;
+    }
+    
+    public User getAccountHolder() {
+    	return accountHolder;
+    }
+    
+    public String getBalance() {
+    	NumberFormat currency = NumberFormat.getCurrencyInstance();
+    	return currency.format(balance);
+    }
+    
+    
 }
