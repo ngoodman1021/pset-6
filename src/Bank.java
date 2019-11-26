@@ -26,9 +26,9 @@ public class Bank {
     private final static int LAST_NAME_END = 63;
     private final static int BALANCE_START = 63;
     
-    private final static String DATA = "data/accounts.dat";		// data file path
+    private final static String DATA = "data/accounts.dat";// data file path
     
-    private List<BankAccount> accounts;							// an in-memory list of BankAccount objects
+    private List<BankAccount> accounts;	// an in-memory list of BankAccount objects
     
     /**
      * Constructs a new instance of the Bank class.
