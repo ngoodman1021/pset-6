@@ -23,8 +23,8 @@ public class Bank {
     private final static int FIRST_NAME_START = 13;
     private final static int FIRST_NAME_END = 33;
     private final static int LAST_NAME_START = 33;
-    private final static int LAST_NAME_END = 63;
-    private final static int BALANCE_START = 63;
+    private final static int LAST_NAME_END = 62;
+    private final static int BALANCE_START = 62;
     
     private final static String DATA = "data/accounts.dat";// data file path
     
