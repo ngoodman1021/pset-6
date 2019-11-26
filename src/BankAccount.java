@@ -2,8 +2,8 @@ import.java.text.NumberFormat;
 
 public class BankAccount {
         
-	private static long prevAccountNo = 100000000L;
-	private int pin;
+    private static long prevAccountNo = 100000000L;
+    private int pin;
     private long accountNo;
     private double balance;
     private User accountHolder;
