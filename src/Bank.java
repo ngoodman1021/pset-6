@@ -26,7 +26,7 @@ public class Bank {
     private final static int LAST_NAME_END = 62;
     private final static int BALANCE_START = 62;
     
-    private final static String DATA = "data/accounts.dat";// data file path
+    private final static String DATA = "data/accounts.dat"; // data file path
     
     private List<BankAccount> accounts;	// an in-memory list of BankAccount objects
     
